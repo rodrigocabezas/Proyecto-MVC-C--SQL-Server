@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ObligatorioMvc_2.Models.Emprendimiento>
+@{
+    ViewBag.Title = "ListarEmprendimientos";
+}
+
+<h2>ListarEmprendimientos</h2>
+<input type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" value="Filtrar" />
+<br />
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Filtrar</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="button" id="btnFiltroOrdenarPuntaje" value="Ordenar Por Puntaje" class="btn btn-danger" />
+                </div>
+                <div class="form-group">
+                    <input type="number" id="numValor1" placeholder="Valor 1" class="form-control" />
+                    <input type="number" id="numValor2" placeholder="Valor 2" class="form-control" />
+                    <br />
+                    <input type="button" id="btnFiltrarPorValor" value="Filtrar Por Valor" class="btn btn-success" />
+                </div>
+                <div class="form-group">
+                    <input type="number" id="numDuracion" placeholder="Dias" class="form-control" />
+                    <br />
+                    <input type="button" id="btnFiltrarPorDuracion" value="Filtrar Por Dias" class="btn btn-warning" />
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<br />
+                <div id="divresultado">
+                    @Html.Partial("View", Model);
+                </div>
+                @section scripts
+{
+                    <script type="text/javascript">
+                        $("document").ready(function () {
+                            $("#btnFiltroOrdenarPuntaje").click(consultaPuntaje);
+                        });
+                        $("document").ready(function () {
+                            $("#btnFiltrarPorValor").click(consultaValor);
+                        });
+                        $("document").ready(function () {
+                            $("#btnFiltrarPorDuracion").click(consultaDuracion);
+                        });
+
+                        function consultaDuracion() {
+                            $.ajax({
+                                url: "/Emprendimiento/FiltroDuracion?Duracion=" + $("#numDuracion").val(),
+                                success: function (resultado) {
+                                    $("#divresultado").html(resultado);
+                                }
+                            })
+                        }
+                        function consultaValor() {
+                            $.ajax({
+                                url: "/Emprendimiento/FiltroRangoCosto?Valor1=" + $("#numValor1").val() + "&Valor2=" + $("#numValor2").val(),
+                                success: function (resultado) {
+                                    $("#divresultado").html(resultado);
+                                }
+                            })
+                        }
+                        function consultaPuntaje() {
+                            $.ajax({
+                                url: "/Emprendimiento/FiltroOrdenarPorPuntaje",
+                                success: function (resultado) {
+                                    $("#divresultado").html(resultado);
+                                }
+                            })
+                        }
+                    </script>
+                }

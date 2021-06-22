@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ObligatorioMvc_2.Models.Emprendimiento>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model=>model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=>model.PuntajeFinal)
+        </th>
+    </tr>
+    @foreach (var e in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modeli=>e.Titulo)
+            </th>
+            <th>
+                @Html.DisplayFor(modeli=> e.PuntajeFinal)
+            </th>
+        </tr>
+    }
+</table>
+
+

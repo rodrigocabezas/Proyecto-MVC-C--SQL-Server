@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("MeToo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Listar Emprendimientos","ListarEmprendimientos","Emprendimiento")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="dropdown">
+                            <a href="#menu" class="dropdown-toggle" data-toggle="dropdown">@User.Identity.Name <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                
+                                <li>@Html.ActionLink("Emprendimientos sin Financiar", "ListarEmprendimientosNoFinanciados", "Emprendimiento")</li>
+                                <li>@Html.ActionLink("Mis Emprendimientos", "MisEmprendimientos", "Emprendimiento")</li>
+                                <li class="divider"></li>
+                                <li>@Html.ActionLink("Cerrar Sesion", "CerrarSesion", "Financiador")</li>
+                            </ul>
+                        </li>
+          
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Iniciar Sesion", "Login", "Financiador")</li>
+                    }
+                </ul>
+</div>
+        </div>
+    </div>
+    @*<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Inicio de Sesion</h4>
+                </div>
+                <div class="modal-body">
+                    @model ObligatorioMvc_2.Models.Financiador
+                    
+                    @using (Html.BeginForm("Login", "Financiador", FormMethod.Post))
+                    {
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div>
+                            @Html.TextBoxFor(fu => fu.Email, new { @class = "form-control", @placeholder = "Email" })
+                            @Html.ValidationMessageFor(fu => fu.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div>
+                            @Html.PasswordFor(pa => pa.Contraseña, new { @class = "form-control", @placeholder = "Contraseña" })
+                            @Html.ValidationMessageFor(pa => pa.Contraseña, "", new { @class = "text-danger" })
+                        </div><br />
+                        <input type="submit" value="Entrar" class="btn btn-success" />
+                    }
+                </div>
+                <div class="modal-footer">
+                    @Html.ActionLink("Registro","Registrar","Financiador")
+                </div>
+            </div>
+
+        </div>
+    </div>*@
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer class="panel-primary navbar-fixed-bottom">
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

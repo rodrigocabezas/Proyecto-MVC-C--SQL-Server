@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>MeeToo</h1>
+    <p class="lead">MeToo es una plataforma que provee a artistas, músicos, cineastas, diseñadores y otros creadores con los recursos y el apoyo necesarios para llevar sus ideas a la realidad. Hasta la fecha, decenas de miles de proyectos creativos de todos los tamaños han podido ser realizados gracias al apoyo de la comunidad de MeToo.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Ver</h2>
+        <p>
+               Podras ver todos los emprendimientos sin estar registrado
+        </p>
+        @Html.ActionLink("Listar Emprendimientos", "ListarEmprendimientos", "Emprendimiento", null, new { @class = "btn btn-info" })
+    </div>
+    <div class="col-md-4">
+        <h2>Registrate</h2>
+        <p>Puedes registrarte como financiador para poder financiar los emprendimientos</p>
+        @Html.ActionLink("Registrate","Registrar","Financiador",null, new { @class = "btn btn-info" })
+    </div>
+    <div class="col-md-4">
+        <h2>Inicia Sesion</h2>
+        <p>Inicia sesion para comenzar a financiar</p>
+        @Html.ActionLink("Iniciar sesion","Login", "Financiador",null, new { @class = "btn btn-info" })
+    </div>
+</div>

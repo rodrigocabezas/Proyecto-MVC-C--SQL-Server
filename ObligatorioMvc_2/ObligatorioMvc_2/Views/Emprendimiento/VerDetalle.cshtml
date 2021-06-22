@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ObligatorioMvc_2.Models.Emprendimiento>
+
+@{
+    ViewBag.Title = "VerDetalle";
+}
+
+<h2>VerDetalle</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Financiador.NombreUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Costo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dias)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PuntajeFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Financiado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Financiador.NombreUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Costo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dias)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PuntajeFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Financiado)
+        </td>
+        <td>
+            @if(User.Identity.IsAuthenticated && item.Financiado==0)
+            { 
+            @Html.ActionLink("Financiar", "Financiar", "Emprendimiento", new { id=item.Id },null)
+            }
+        </td>
+    </tr>
+}
+
+</table>
